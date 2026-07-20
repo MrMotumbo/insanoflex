@@ -19,9 +19,7 @@ Enjoy the game!
 
 BlackJack Game Credits
 
-Card Art
-Playing Table
-Button Art
+Card Art, Playing Table & Button Art
 Created by MrMotumbo via Adobe Photoshop
 
 Created using Godot 4.6.1
