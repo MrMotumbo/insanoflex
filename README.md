@@ -26,13 +26,17 @@ Created by MrMotumbo via Adobe Photoshop
 
 Created using Godot 4.6.1
 
-Code
+Code:
+
 Created with Google Gemini
 
 Audio
 Muisc:
+
 All Songs - Music by Alex Morgan from Pixabay
 
 SFX:
+
 Deck Shuffle (Shuffle Cards) - Sound Effect by freesound_community from Pixabay
+
 Card Dealt Sound - Sound Effect by freesound_community from Pixabay
