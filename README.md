@@ -1,5 +1,10 @@
 # Black Jack
 
+DISCLAIMER:
+I AM NOT A SOFTWARE ENGINNEER OR CODE WRITER. THIS PROJECT'S PURPOSE WAS TO LEARN GDSCRIPT IN A FUN INTERACTIVE WAY USING AI. 
+I HAVE NO INTENTION OF SELLING THIS PROJECT. IT IS A LEARNING EXPERIENCE FOR ME.
+THAT BEING SAID:
+
 Welcome to my Black Jack game!
 
 ## How to Play
@@ -17,7 +22,7 @@ BlackJack Game Credits
 Card Art
 Playing Table
 Button Art
-Created by Taylor Wolbach via Adobe Photoshop
+Created by MrMotumbo via Adobe Photoshop
 
 Created using Godot 4.6.1
 
