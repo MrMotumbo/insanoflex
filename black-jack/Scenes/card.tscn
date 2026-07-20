@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://kb7icg7tdfxr"]
+
+[ext_resource type="Script" uid="uid://cog38s6n7udbk" path="res://Scripts/card.gd" id="1_0qqmn"]
+[ext_resource type="Texture2D" uid="uid://c5k2qgau0dtr" path="res://Sprites/Cards/2 of Clubs.png" id="2_wf8id"]
+
+[node name="Card" type="Node2D" unique_id=184497962]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_0qqmn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=413621382]
+texture = ExtResource("2_wf8id")

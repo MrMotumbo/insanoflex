@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ejc4o7hm5tpy"
+path="res://.godot/imported/ShuffleSound.mp3-e08369780bdc44969873c094544ba7cd.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/ShuffleSound.mp3"
+dest_files=["res://.godot/imported/ShuffleSound.mp3-e08369780bdc44969873c094544ba7cd.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
