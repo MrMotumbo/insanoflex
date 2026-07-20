@@ -21,7 +21,7 @@ Created by Taylor Wolbach via Adobe Photoshop
 
 Created using Godot 4.6.1
 
-Coding
+Code
 Created with Google Gemini
 
 Audio
