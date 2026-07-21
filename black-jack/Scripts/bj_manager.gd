@@ -161,21 +161,31 @@ func end_round_logic():
 		await get_tree().create_timer(0.5).timeout
 
 	var d_score = calculate_score(dealer_hand)
-	var total_money_change = 0
+	var total_payout = 0
 	var final_summary = ""
 
 	for i in range(player_hands.size()):
 		var p_score = calculate_score(player_hands[i])
-		var change = 0
-		if p_score > 21: change = -wager; final_summary += "Bust "
-		elif p_score > d_score or d_score > 21: change = wager; final_summary += "Win "
-		elif p_score == d_score: final_summary += "Push "
-		else: change = -wager; final_summary += "Loss "
-		total_money_change += change
+		var is_blackjack = (p_score == 21 and player_hands[i].size() == 2)
 
-	player_money += (wager + total_money_change)
-	show_money_change(total_money_change)
+		if p_score > 21: 
+			final_summary += "Bust " # Payout += 0
+		elif is_blackjack:
+			total_payout += int(wager * 2.5) # Blackjack pays 3:2 (Bet + 1.5x profit)
+			final_summary += "Blackjack! "
+		elif p_score > d_score or d_score > 21: 
+			total_payout += (wager * 2) # Win pays 1:1 (Bet + 1x profit)
+			final_summary += "Win "
+		elif p_score == d_score: 
+			total_payout += wager # Push (Return original bet)
+			final_summary += "Push "
+		else: 
+			final_summary += "Loss " # Payout += 0
+
+	player_money += total_payout
+	show_money_change(total_payout - wager) # Visual feedback of net gain/loss
 	show_notification(final_summary)
+
 	await get_tree().create_timer(2.0).timeout
 	show_betting_controls()
 	update_money_display()
@@ -322,9 +332,13 @@ func _on_new_game_button_pressed(): start_game()
 func _on_resume_button_pressed(): toggle_pause(false)
 func _on_quit_button_pressed(): get_tree().quit()
 func _on_bet_button_pressed(): 
-	if player_money >= current_bet: player_money -= current_bet; start_round()
-	else: trigger_game_over()
-
+	if player_money >= wager: 
+		player_money -= wager
+		update_money_display() # <-- THIS UPDATES THE UI INSTANTLY
+		start_round()
+	else: 
+		show_notification("Not enough money!")
+	
 func _on_hit_button_pressed():
 	var spawn_node = get_spawn_node_for_hand(active_hand_index)
 	deal_card(player_hands[active_hand_index], spawn_node, true)
@@ -352,9 +366,10 @@ func _on_next_track_button_pressed() -> void:
 func _on_prev_track_button_pressed():
 	_change_track(-1)
 func _on_bet_plus_pressed():
-	if player_money >= (wager + 5): # Check if they can afford more
+	# Only increase if they have the money for the NEW total wager
+	if player_money >= (wager + 5): 
 		wager += 5
-		current_bet = wager # Keep both in sync
+		current_bet = wager
 		update_money_display()
 
 func _on_bet_minus_pressed():
