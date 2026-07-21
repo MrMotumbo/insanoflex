@@ -17,6 +17,8 @@ I am currently playtesting this version. If you run into any bugs, glitches, or 
 
 Enjoy the game!
 
+--------------------------------------
+
 BlackJack Game Credits
 
 Card Art, Playing Table & Button Art
