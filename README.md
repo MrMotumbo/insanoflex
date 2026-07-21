@@ -22,6 +22,9 @@ BlackJack Game Credits
 Card Art, Playing Table & Button Art
 Created by MrMotumbo via Adobe Photoshop
 
+Next & Previous Song Buttons
+Created by akiross from OpenClipArt
+
 Created using Godot 4.6.1
 
 Code:
