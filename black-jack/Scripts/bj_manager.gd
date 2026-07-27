@@ -10,6 +10,11 @@ var active_hand_index: int = 0
 var player_money: int = 100
 var current_bet: int = 5
 var wager: int = 0
+var holding_plus: bool = false
+var holding_minus: bool = false
+var hold_timer: float = 0.0
+var hold_delay: float = 0.4  # Initial delay before rapid scrolling starts
+var hold_speed: float = 0.12 # Speed of the rapid increase/decrease
 var game_started: bool = false
 var original_change_label_pos: Vector2
 var indicator_tween: Tween # Add this under your other variables
@@ -365,18 +370,6 @@ func _on_next_track_button_pressed() -> void:
 	_change_track(1)
 func _on_prev_track_button_pressed():
 	_change_track(-1)
-func _on_bet_plus_pressed():
-	# Only increase if they have the money for the NEW total wager
-	if player_money >= (wager + 5): 
-		wager += 5
-		current_bet = wager
-		update_money_display()
-
-func _on_bet_minus_pressed():
-	if wager > 5: # Assuming $5 is your minimum
-		wager -= 5
-		current_bet = wager
-		update_money_display()
 
 func show_betting_controls():
 	$BetButton.show()
@@ -408,3 +401,49 @@ func play_shuffle_animation():
 	tween.tween_property($DeckSprite, "scale", big_scale, 0.1)
 	tween.tween_property($DeckSprite, "scale", normal_scale, 0.1)
 	
+func _process(delta):
+	# Handle holding down the plus/minus buttons for rapid betting
+	if holding_plus:
+		hold_timer += delta
+		if hold_timer >= hold_speed:
+			hold_timer = 0.0
+			increase_bet()
+	elif holding_minus:
+		hold_timer += delta
+		if hold_timer >= hold_speed:
+			hold_timer = 0.0
+			decrease_bet()
+			
+func increase_bet():
+	if player_money >= (wager + 5): 
+		wager += 5
+		current_bet = wager
+		update_money_display()
+
+func decrease_bet():
+	if wager > 5: 
+		wager -= 5
+		current_bet = wager
+		update_money_display()
+
+# Single click handlers
+func _on_bet_plus_pressed():
+	increase_bet()
+
+func _on_bet_minus_pressed():
+	decrease_bet()
+
+# Hold down signal handlers for rapid adjustment
+func _on_bet_plus_button_down():
+	holding_plus = true
+	hold_timer = -hold_delay
+
+func _on_bet_plus_button_up():
+	holding_plus = false
+
+func _on_bet_minus_button_down():
+	holding_minus = true
+	hold_timer = -hold_delay
+
+func _on_bet_minus_button_up():
+	holding_minus = false
